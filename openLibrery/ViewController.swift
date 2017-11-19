@@ -63,11 +63,12 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func buscarButtom(_ sender: UIButton) {
+    @IBAction func isbnEnter(_ sender: UITextField) {
         buscarISBNsincrono()
         isbnTextView.text = resultado
-
     }
+    
+    
     
 }
 
