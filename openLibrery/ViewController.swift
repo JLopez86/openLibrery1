@@ -15,6 +15,7 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var autorLabel: UILabel!
     @IBOutlet weak var tituloLabel: UILabel!
+
     var titulo : String = ""
     var portada : String = ""
     var autor : String = "- "
@@ -132,6 +133,8 @@ class ViewController: UIViewController {
             autorLabel.text = autor
             print(self.portada)
 //            print(autor)
+            titulo = ""
+            autor = "- "
             
         } catch {
             print(error.localizedDescription)
