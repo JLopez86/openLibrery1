@@ -109,29 +109,44 @@ class ViewController: UIViewController {
             let datos = try Data(contentsOf: url! as URL )
             print(datos)
             
+
+            
             let json = try JSONSerialization.jsonObject(with: datos, options: .mutableLeaves)
             
+            
             let dico1 = json as! NSDictionary
-            let dico2 = dico1["ISBN:\(isbn)"] as! NSDictionary
-            titulo = dico2["title"] as! NSString as String
-            let dico3 = dico2["authors"] as! NSArray
- 
-            for i in dico3 {
-                let autorDictionario = i as! NSDictionary
-                print(autorDictionario["name"] as! NSString as String)
+
+                let dico2 = dico1["ISBN:\(isbn)"] as! NSDictionary
+                titulo = dico2["title"] as! NSString as String
+                let dico3 = dico2["authors"] as! NSArray
                 
-                self.autor += (autorDictionario["name"] as! NSString as String)
-                
-                
+                for i in dico3 {
+                    let autorDictionario = i as! NSDictionary
+                    print(autorDictionario["name"] as! NSString as String)
+                    
+                    self.autor += (autorDictionario["name"] as! NSString as String)
+                    
+                    
                 }
+                
+                if dico2["cover"] != nil {
+                    let dico4 = dico2["cover"] as! NSDictionary
+                    
+                    self.portada = dico4["large"] as! NSString as String
+                    print(self.portada)
+                    mostrarImagen(portada, inView: portadaLibro)
+                } else {
+                    print("sin imagen")
+                    pararProgreso()
+                }
+
+
             
-            let dico4 = dico2["cover"] as! NSDictionary
-            
-            self.portada = dico4["large"] as! NSString as String
+
            
             tituloLabel.text = titulo
             autorLabel.text = autor
-            print(self.portada)
+
 //            print(autor)
             titulo = ""
             autor = "- "
@@ -182,7 +197,7 @@ class ViewController: UIViewController {
     @IBAction func isbnEnter(_ sender: UITextField) {
         inicioProgreso()
         leeISBN()
-        mostrarImagen(portada, inView: portadaLibro)
+
         
     }
     
